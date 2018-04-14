@@ -1,8 +1,9 @@
 /*
  * Create a list that holds all of your cards
  */
-
-
+/*let cards = documents.getElementsByClassName('card');*/
+let cards = document.querySelectorAll("ul > li.card");
+console.log(cards);
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
