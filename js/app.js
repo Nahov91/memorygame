@@ -1,16 +1,23 @@
 /*
  * Create a list that holds all of your cards
  */
-let logo = ['leaf', 'leaf', 'diamond', 'diamond', 'bicycle', 'bicycle', 'hook', 'hook', 'cube', 'cube', 'plane', 'plane', 'thunder', 'thunder', 'bomb', 'bomb'];
+let logo = ['leaf', 'leaf', 'diamond', 'diamond', 'bicycle', 'bicycle', 'anchor', 'anchor', 'cube', 'cube', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb'];
 let timer = 0;
 let stars = 3;
 let opened = [];
 let matches = [];
 let moves = 0;
+$deck = $('.deck')
 
-/*gameBase() {
+gameBase() {
   let cards = shuffle(logo);
-}*/
+  $deck.empty();
+  matches = 0;
+  moves = 0;
+  for (var i = 0; i < cards.length; i++) {
+    $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
+  }
+}
 
 /*
  * Display the cards on the page
