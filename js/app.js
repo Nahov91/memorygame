@@ -1,15 +1,24 @@
 /*
  * Create a list that holds all of your cards
  */
-/*let cards = documents.getElementsByClassName('card');*/
-let cards = document.querySelectorAll("ul > li.card");
-console.log(cards);
+let logo = ['leaf', 'leaf', 'diamond', 'diamond', 'bicycle', 'bicycle', 'hook', 'hook', 'cube', 'cube', 'plane', 'plane', 'thunder', 'thunder', 'bomb', 'bomb'];
+let timer = 0;
+let stars = 3;
+let opened = [];
+let matches = [];
+let moves = 0;
+
+/*gameBase() {
+  let cards = shuffle(logo);
+}*/
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -26,6 +35,8 @@ function shuffle(array) {
     return array;
 }
 
+shuffle(cards);
+console.log(cards);
 
 /*
  * set up the event listener for a card. If a card is clicked:
