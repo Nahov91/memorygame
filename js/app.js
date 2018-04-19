@@ -9,6 +9,13 @@ let matches = [];
 let moves = 0;
 $deck = $('.deck')
 
+/*
+ * Display the cards on the page
+ *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - loop through each card and create its HTML
+ *   - add each card's HTML to the page
+ */
+
 gameBase() {
   let cards = shuffle(logo);
   $deck.empty();
@@ -17,14 +24,10 @@ gameBase() {
   for (var i = 0; i < cards.length; i++) {
     $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
   }
+addFlippedCard()
+
 }
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -40,6 +43,15 @@ function shuffle(array) {
     }
 
     return array;
+}
+
+// Flipping cards and adding them to opened
+let addFlippedCard() {
+  var $card = $('.card');
+
+  $card.bind('click', function() {
+    $flippedCard = $(this).addClass('card open show');
+    opened.push($openedCard);
 }
 
 shuffle(cards);
