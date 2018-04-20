@@ -16,19 +16,6 @@ $deck = $('.deck')
  *   - add each card's HTML to the page
  */
 
-gameBase() {
-  let cards = shuffle(logo);
-  $deck.empty();
-  matches = 0;
-  moves = 0;
-  for (var i = 0; i < cards.length; i++) {
-    $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
-  }
-addFlippedCard()
-
-}
-
-
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -45,17 +32,32 @@ function shuffle(array) {
     return array;
 }
 
+//Game Base
+function gameBase() {
+  let cards = shuffle(logo);
+  $deck.empty();
+  matches = 0;
+  moves = 0;
+  for (var i = 0; i < cards.length; i++) {
+    $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
+  }
+addFlippedCard()
+
+}
+
+
 // Flipping cards and adding them to opened
-let addFlippedCard() {
+function addFlippedCard() {
   var $card = $('.card');
 
   $card.bind('click', function() {
     $flippedCard = $(this).addClass('card open show');
-    opened.push($openedCard);
-}
+    opened.push($flippedCard);
+})
+};
 
-shuffle(cards);
-console.log(cards);
+gameBase();
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
