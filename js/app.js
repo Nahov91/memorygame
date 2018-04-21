@@ -5,7 +5,7 @@ let logo = ['leaf', 'leaf', 'diamond', 'diamond', 'bicycle', 'bicycle', 'anchor'
 let timer = 0;
 let stars = 3;
 let opened = [];
-let matches = [];
+let matches = 0;
 let moves = 0;
 $deck = $('.deck')
 
@@ -19,17 +19,18 @@ $deck = $('.deck')
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+  var currentIndex = array.length,
+    temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-    return array;
+  return array;
 }
 
 //Game Base
@@ -41,9 +42,26 @@ function gameBase() {
   for (var i = 0; i < cards.length; i++) {
     $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
   }
-addFlippedCard()
+  addFlippedCard()
 
 }
+
+//Check if there is a match after two card is opened
+function compareOpen() {
+if (opened.length == 2) {
+  let cardOne = $(opened[0]).children().attr('class');
+  let cardTwo = $(opened[1]).children().attr('class');
+
+  if (cardOne === cardTwo) {
+    opened[0].addClass('match') && opened[1].addClass('match');
+    opened = [];
+
+  } else {
+    opened[0].removeClass('show open') && opened[1].removeClass('show open');
+    opened = [];
+  }
+}
+};
 
 
 // Flipping cards and adding them to opened
@@ -53,7 +71,8 @@ function addFlippedCard() {
   $card.bind('click', function() {
     $flippedCard = $(this).addClass('card open show');
     opened.push($flippedCard);
-})
+    compareOpen();
+  })
 };
 
 gameBase();
