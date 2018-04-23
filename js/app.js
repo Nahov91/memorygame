@@ -7,7 +7,11 @@ let stars = 3;
 let opened = [];
 let matches = 0;
 let moves = 0;
-$deck = $('.deck')
+let delay = 500;
+let currentTimer;
+$timer = $('.timer');
+second = 0;
+$deck = $('.deck');
 
 /*
  * Display the cards on the page
@@ -40,27 +44,35 @@ function gameBase() {
   matches = 0;
   moves = 0;
   for (var i = 0; i < cards.length; i++) {
-    $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
+    $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'));
   }
-  addFlippedCard()
 
+  resetTimer(currentTimer);
+  second = 0;
+  addFlippedCard();
+  $timer.text(`${second}`)
+  time();
 }
 
 //Check if there is a match after two card is opened
 function compareOpen() {
-if (opened.length == 2) {
-  let cardOne = $(opened[0]).children().attr('class');
-  let cardTwo = $(opened[1]).children().attr('class');
 
-  if (cardOne === cardTwo) {
-    opened[0].addClass('match') && opened[1].addClass('match');
-    opened = [];
+  if (opened.length == 2) {
+    let cardOne = $(opened[0]).children().attr('class');
+    let cardTwo = $(opened[1]).children().attr('class');
 
-  } else {
-    opened[0].removeClass('show open') && opened[1].removeClass('show open');
-    opened = [];
+    if (cardOne === cardTwo) {
+      opened[0].addClass('match') && opened[1].addClass('match');
+      opened = [];
+
+    } else {
+      setTimeout(function () {
+        opened[0].removeClass('show open') && opened[1].removeClass('show open');
+        opened = [];
+
+      }, delay / 1.5);
+    }
   }
-}
 };
 
 
@@ -74,6 +86,21 @@ function addFlippedCard() {
     compareOpen();
   })
 };
+
+//Start time and reset time functions
+function time() {
+  currentTimer = setInterval(function() {
+    $timer.text(`${second}`)
+    second = second + 1
+  }, 1000);
+}
+
+function resetTimer(timer) {
+  if (timer) {
+    clearInterval(timer);
+  }
+}
+
 
 gameBase();
 
