@@ -12,6 +12,11 @@ let currentTimer;
 $timer = $('.timer');
 second = 0;
 $deck = $('.deck');
+let oneStar = 32;
+let twoStar = 24;
+let threeStar = 12;
+$numOfMoves = $('.moves');
+$numOfStars = $('.fa-star');
 
 /*
  * Display the cards on the page
@@ -52,6 +57,7 @@ function gameBase() {
   addFlippedCard();
   $timer.text(`${second}`)
   time();
+  $numOfMoves.text('0');
 }
 
 //Check if there is a match after two card is opened
@@ -71,6 +77,8 @@ function compareOpen() {
         opened = [];
 
       }, delay / 1.5);
+      moves++;
+      $numOfMoves.html(moves);
     }
   }
 };
