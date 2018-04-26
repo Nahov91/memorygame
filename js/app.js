@@ -12,9 +12,10 @@ let currentTimer;
 $timer = $('.timer');
 second = 0;
 $deck = $('.deck');
-let oneStar = 32;
-let twoStar = 24;
-let threeStar = 12;
+let zeroStar = 24;
+let oneStar = 16;
+let twoStar = 8;
+let threeStar = 2;
 $numOfMoves = $('.moves');
 $numOfStars = $('.fa-star');
 
@@ -70,14 +71,16 @@ function compareOpen() {
     if (cardOne === cardTwo) {
       opened[0].addClass('match') && opened[1].addClass('match');
       opened = [];
+      matches++;
 
     } else {
-      setTimeout(function () {
+      setTimeout(function() {
         opened[0].removeClass('show open') && opened[1].removeClass('show open');
         opened = [];
 
-      }, delay / 1.5);
+      }, delay / 0.5);
       moves++;
+      scoring(moves);
       $numOfMoves.html(moves);
     }
   }
@@ -94,6 +97,30 @@ function addFlippedCard() {
     compareOpen();
   })
 };
+
+//Scoring system
+function scoring(moves) {
+  let rating = 3;
+  if (moves > twoStar && moves < oneStar) {
+    $numOfStars.eq(2).removeClass('fa-star').addClass('fa-star-o');
+    rating = 2;
+  } else if (moves > oneStar && moves < zeroStar) {
+    $numOfStars.eq(1).removeClass('fa-star').addClass('fa-star-o');
+    rating = 1;
+  } else if (moves > zeroStar) {
+    $numOfStars.eq(0).removeClass('fa-star').addClass('fa-star-o');
+    rating = 0;
+  }
+
+  return {
+    score: rating
+  };
+};
+
+
+//Game Won
+
+
 
 //Start time and reset time functions
 function time() {
