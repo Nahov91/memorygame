@@ -12,6 +12,7 @@ let currentTimer;
 $timer = $('.timer');
 second = 0;
 $deck = $('.deck');
+deckSize = logo.length / 2;
 let zeroStar = 24;
 let oneStar = 16;
 let twoStar = 8;
@@ -45,6 +46,7 @@ function shuffle(array) {
 
 //Game Base
 function gameBase() {
+  allowDblClick: false;
   let cards = shuffle(logo);
   $deck.empty();
   matches = 0;
@@ -78,10 +80,17 @@ function compareOpen() {
         opened[0].removeClass('show open') && opened[1].removeClass('show open');
         opened = [];
 
-      }, delay / 0.5);
+      }, delay / 2.5);
       moves++;
       scoring(moves);
       $numOfMoves.html(moves);
+    }
+    if (deckSize === matches) {
+      scoring(moves);
+      let score = scoring(moves).score;
+      setTimeout(function(){
+        gameWon(moves, score);
+      },400);
     }
   }
 };
@@ -119,7 +128,18 @@ function scoring(moves) {
 
 
 //Game Won
-
+function gameWon(moves, score) {
+  swal({
+    title: 'You won!',
+    text: 'In ' + moves + ' moves and ' + second + ' seconds with a rating of ' + score + ' stars!',
+    type: 'success',
+    confirmButtonText: 'Play Again!'
+  }).then(function(isConfirm) {
+    if (isConfirm) {
+      gameBase();
+    }
+  })
+}
 
 
 //Start time and reset time functions
