@@ -12,6 +12,7 @@ let currentTimer;
 $timer = $('.timer');
 second = 0;
 $deck = $('.deck');
+$restart = $('.restart');
 deckSize = logo.length / 2;
 let zeroStar = 24;
 let oneStar = 16;
@@ -155,6 +156,21 @@ function resetTimer(timer) {
     clearInterval(timer);
   }
 }
+
+//Reset game function
+$restart.bind('click', function() {
+  swal({
+    title: 'Are you sure you want to restart?',
+    text: 'Your progress will be lost!',
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sure!'
+  }).then(function(isConfirm) {
+    if (isConfirm) {
+      gameBase();
+    }
+  })
+});
 
 
 gameBase();
