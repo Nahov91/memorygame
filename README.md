@@ -1,20 +1,30 @@
-# Memory Game Project
+# Memory Game
 
-## Table of Contents
+This is the classic memory game that keeps your mind fresh. You have to flip the cards and find the matching ones. Only two cards can be flipped at once.
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+## Getting Started
 
-## Instructions
+To play the game, you have to download the all files found in this repository. The game starts with launching index.html
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+### Prerequisites
 
-To get started, open `js/app.js` and start building out the app's functionality
+To install the game you have to have a computer or a web storage, where you can install websites.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+
+### Installing
+
+To install the game you have to download all files from here and copy to the destination drive.
+
+
+## Built With
+
+Built using jQuery.
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+The files in this repository are used for a Udacity Google FEWD project called the memory game. Because of this pull requests will _not_ be merged into the project.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Authors
+
+* Gábor Náhóczki

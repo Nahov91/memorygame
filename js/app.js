@@ -1,7 +1,6 @@
 //Creating a list of cards (logos) and setting basic variables and selectors
 let logo = ['leaf', 'leaf', 'diamond', 'diamond', 'bicycle', 'bicycle', 'anchor', 'anchor', 'cube', 'cube', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb'];
 let timer = 0;
-let stars = 3;
 let opened = [];
 let matches = 0;
 let moves = 0;
@@ -12,10 +11,8 @@ second = 0;
 $deck = $('.deck');
 $restart = $('.restart');
 deckSize = logo.length / 2;
-let zeroStar = 24;
 let oneStar = 16;
 let twoStar = 8;
-let threeStar = 2;
 $numOfMoves = $('.moves');
 $numOfStars = $('.fa-star');
 
@@ -47,6 +44,8 @@ function gameBase() {
     $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'));
   }
   resetTimer(currentTimer);
+  opened = [];
+  $('.fa-star-o').removeClass('fa-star-o').addClass('fa-star');
   second = 0;
   addFlippedCard();
   $timer.text(`${second}`)
@@ -104,12 +103,9 @@ function scoring(moves) {
   if (moves > twoStar && moves < oneStar) {
     $numOfStars.eq(2).removeClass('fa-star').addClass('fa-star-o');
     rating = 2;
-  } else if (moves > oneStar && moves < zeroStar) {
+  } else if (moves > oneStar) {
     $numOfStars.eq(1).removeClass('fa-star').addClass('fa-star-o');
     rating = 1;
-  } else if (moves > zeroStar) {
-    $numOfStars.eq(0).removeClass('fa-star').addClass('fa-star-o');
-    rating = 0;
   }
 
   return {
