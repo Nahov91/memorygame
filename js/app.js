@@ -78,9 +78,10 @@ function compareOpen() {
     if (deckSize === matches) {
       scoring(moves);
       let score = scoring(moves).score;
-      setTimeout(function(){
+      setTimeout(function() {
         gameWon(moves, score);
-      },400);
+      }, 400);
+      clearInterval(timer);
     }
   }
 };
@@ -128,23 +129,32 @@ function gameWon(moves, score) {
     if (isConfirm) {
       gameBase();
     }
-  })
-}
+  });
+  stopTimer();
+};
 
-
-//Start time and reset time functions
+//Timer functions
 function time() {
-  currentTimer = setInterval(function() {
-    $timer.text(`${second}`)
-    second = second + 1
-  }, 1000);
-}
+  if (deckSize !== matches) {
+    currentTimer = setInterval(function() {
+      $timer.text(`${second}`);
+      second = second + 1
+    }, 1000);
+  }
+};
 
 function resetTimer(timer) {
   if (timer) {
     clearInterval(timer);
   }
-}
+};
+
+function stopTimer(timer) {
+  second = 0;
+  clearInterval(currentTimer);
+  second.innerHTML = '0';
+};
+
 
 //Reset game function and popup
 $restart.bind('click', function() {
