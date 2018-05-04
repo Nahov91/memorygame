@@ -6,8 +6,10 @@ let matches = 0;
 let moves = 0;
 let delay = 500;
 let currentTimer;
+let timeStarted = false;
 $timer = $('.timer');
 second = 0;
+$card = $('.card');
 $deck = $('.deck');
 $restart = $('.restart');
 deckSize = logo.length / 2;
@@ -35,11 +37,11 @@ function shuffle(array) {
 
 //Game Base, that shuffles and shows cards
 function gameBase() {
-  allowDblClick: false;
   let cards = shuffle(logo);
   $deck.empty();
   matches = 0;
   moves = 0;
+  timeStarted = false;
   for (var i = 0; i < cards.length; i++) {
     $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'));
   }
@@ -48,8 +50,7 @@ function gameBase() {
   $('.fa-star-o').removeClass('fa-star-o').addClass('fa-star');
   second = 0;
   addFlippedCard();
-  $timer.text(`${second}`)
-  time();
+  $timer.text(`${second}`);
   $numOfMoves.text('0');
 }
 
@@ -63,6 +64,9 @@ function compareOpen() {
       opened[0].addClass('match') && opened[1].addClass('match');
       opened = [];
       matches++;
+      moves++;
+      scoring(moves);
+      $numOfMoves.html(moves);
 
     } else {
       setTimeout(function() {
@@ -83,19 +87,18 @@ function compareOpen() {
       clearInterval(timer);
     }
   }
-};
+}
 
 
 // Flipping cards and adding them to opened
 function addFlippedCard() {
-  var $card = $('.card');
-
+  $card = $('.card');
   $card.bind('click', function() {
     $flippedCard = $(this).addClass('card open show');
     opened.push($flippedCard);
     compareOpen();
-  })
-};
+  });
+}
 
 //Scoring system with stars at top based on counting of moves
 function scoring(moves) {
@@ -111,7 +114,7 @@ function scoring(moves) {
   return {
     score: rating
   };
-};
+}
 
 
 //Game Won popup and function
@@ -127,29 +130,37 @@ function gameWon(moves, score) {
     }
   });
   stopTimer();
-};
+}
+
 
 //Timer functions
-function time() {
-  if (deckSize !== matches) {
+if (!timeStarted) {
+  startTimer();
+  timeStarted = true;
+}
+
+function startTimer() {
+  $deck.one('click', function time() {
     currentTimer = setInterval(function() {
       $timer.text(`${second}`);
-      second = second + 1
+      second = second + 1;
     }, 1000);
-  }
-};
+  });
+}
+
+
 
 function resetTimer(timer) {
   if (timer) {
     clearInterval(timer);
   }
-};
+}
 
 function stopTimer(timer) {
   second = 0;
   clearInterval(currentTimer);
   second.innerHTML = '0';
-};
+}
 
 
 //Reset game function and popup
@@ -164,7 +175,7 @@ $restart.bind('click', function() {
     if (isConfirm) {
       gameBase();
     }
-  })
+  });
 });
 
 
