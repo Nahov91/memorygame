@@ -153,6 +153,8 @@ function startTimer() {
 function resetTimer(timer) {
   if (timer) {
     clearInterval(timer);
+    timeStarted = false;
+    startTimer();
   }
 }
 
@@ -173,6 +175,7 @@ $restart.bind('click', function() {
     confirmButtonText: 'Sure!'
   }).then(function(isConfirm) {
     if (isConfirm) {
+      stopTimer();
       gameBase();
     }
   });
